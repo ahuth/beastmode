@@ -1,0 +1,22 @@
+# See https://atom.io/docs/latest/hacking-atom-package-word-count#menus for more details
+'context-menu':
+  'atom-text-editor': [
+    {
+      'label': 'Toggle beastmode'
+      'command': 'beastmode:toggle'
+    }
+  ]
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'beastmode'
+      'submenu': [
+        {
+          'label': 'Toggle'
+          'command': 'beastmode:toggle'
+        }
+      ]
+    ]
+  }
+]
