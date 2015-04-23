@@ -9,11 +9,7 @@ module.exports = Beastmode =
   activate: (state) ->
     @beastmodeView = new BeastmodeView(state.beastmodeViewState)
     @modalPanel = atom.workspace.addModalPanel(item: @beastmodeView.getElement(), visible: false)
-
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
-
-    # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'beastmode:toggle': => @toggle()
 
   deactivate: ->
