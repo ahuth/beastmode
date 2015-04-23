@@ -7,5 +7,5 @@
 
 # For more detailed documentation see
 # https://atom.io/docs/latest/behind-atom-keymaps-in-depth
-'atom-workspace':
-  'ctrl-alt-o': 'beastmode:toggle'
+'atom-workspace atom-text-editor:not(.mini)':
+  'shift-enter': 'beastmode:toggle'
