@@ -1,6 +1,6 @@
 module.exports =
 class BeastmodeView
-  constructor: (serializedState) ->
+  constructor: ->
     @element = document.createElement('div')
     @element.classList.add('beastmode')
 
@@ -8,9 +8,6 @@ class BeastmodeView
     message.textContent = "The Beastmode package is Alive! It's ALIVE!"
     message.classList.add('message')
     @element.appendChild(message)
-
-  # Returns an object that can be retrieved when package is activated
-  serialize: ->
 
   destroy: ->
     @element.remove()

@@ -7,7 +7,7 @@ module.exports = Beastmode =
   subscriptions: null
 
   activate: (state) ->
-    @beastmodeView = new BeastmodeView(state.beastmodeViewState)
+    @beastmodeView = new BeastmodeView()
     @modalPanel = atom.workspace.addModalPanel(item: @beastmodeView.getElement(), visible: false)
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add 'atom-workspace', 'beastmode:toggle': => @toggle()
@@ -16,9 +16,6 @@ module.exports = Beastmode =
     @modalPanel.destroy()
     @subscriptions.dispose()
     @beastmodeView.destroy()
-
-  serialize: ->
-    beastmodeViewState: @beastmodeView.serialize()
 
   toggle: ->
     console.log 'Beastmode was toggled!'
