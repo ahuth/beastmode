@@ -1,25 +1,27 @@
-BeastmodeView = require './beastmode-view'
 {CompositeDisposable} = require 'atom'
 
-module.exports = Beastmode =
-  beastmodeView: null
-  modalPanel: null
-  subscriptions: null
-
-  activate: (state) ->
-    @beastmodeView = new BeastmodeView()
-    @modalPanel = atom.workspace.addModalPanel(item: @beastmodeView.getElement(), visible: false)
+module.exports =
+class Beastmode
+  constructor: (workspace) ->
+    @workspace = workspace
     @subscriptions = new CompositeDisposable
-    @subscriptions.add atom.commands.add 'atom-workspace', 'beastmode:toggle': => @toggle()
+    @subscriptions.add atom.commands.add "atom-workspace", "beastmode:toggle": => @toggle()
 
-  deactivate: ->
-    @modalPanel.destroy()
+    element = document.createElement('div')
+    element.classList.add('beastmode')
+
+    message = document.createElement('div')
+    message.textContent = "The Beastmode package is Alive! It's ALIVE!"
+    message.classList.add('message')
+    element.appendChild(message)
+
+    @modalPanel = atom.workspace.addModalPanel(item: element, visible: false)
+
+  destroy: ->
+    @workspace = null
     @subscriptions.dispose()
-    @beastmodeView.destroy()
 
   toggle: ->
-    console.log 'Beastmode was toggled!'
-
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
