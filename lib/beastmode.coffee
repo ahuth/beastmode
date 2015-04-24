@@ -14,6 +14,7 @@ class Beastmode
   destroy: ->
     @workspace = null
     @subscriptions.dispose()
+    @overlay.remove()
 
   toggle: ->
     if @modalPanel.isVisible()
