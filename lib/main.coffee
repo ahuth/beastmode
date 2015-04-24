@@ -7,5 +7,5 @@ module.exports =
     @beastmode = new Beastmode(atom.workspace)
 
   deactivate: ->
-    @beastmode.destroy()
+    @beastmode?.destroy()
     @beastmode = null
