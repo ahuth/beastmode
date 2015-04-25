@@ -7,6 +7,7 @@ class Beastmode
     @workspace = workspace
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add "atom-workspace", "beastmode:toggle": => @toggle()
+    @subscriptions.add atom.commands.add "atom-workspace", "beastmode:clear": => @clear()
 
     @overlay = new Overlay
     @modalPanel = atom.workspace.addModalPanel(item: @overlay.get(0), visible: false)
@@ -21,3 +22,6 @@ class Beastmode
       @modalPanel.hide()
     else
       @modalPanel.show()
+
+  clear: ->
+    @modalPanel.hide()
