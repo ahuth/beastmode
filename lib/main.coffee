@@ -3,6 +3,7 @@ Beastmode = require './beastmode'
 
 module.exports =
   beastmode: null
+  subscriptions: null
 
   activate: ->
     @beastmode = new Beastmode(atom.workspace)
@@ -11,6 +12,6 @@ module.exports =
     @subscriptions.add atom.commands.add "atom-workspace", "beastmode:clear": => @beastmode.clear()
 
   deactivate: ->
-    @subscriptions.dispose()
+    @subscriptions?.dispose()
     @beastmode?.destroy()
     @beastmode = null
