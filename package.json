@@ -1,6 +1,6 @@
 {
   "name": "beastmode",
-  "main": "./lib/beastmode",
+  "main": "./lib/main",
   "version": "0.0.0",
   "description": "21st century command composing for Atom",
   "activationCommands": {
@@ -12,5 +12,6 @@
     "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
+    "atom-space-pen-views": "^2.0.3"
   }
 }
