@@ -36,3 +36,9 @@ describe "Motions", ->
       position = Motions.startOfLine(cursor)
       expect(position.row).toBe 4
       expect(position.column).toBe 0
+
+  describe "firstCharacterOfLine", ->
+    it "gets the position of the first character of the current line", ->
+      position = Motions.firstCharacterOfLine(editor, cursor)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 4

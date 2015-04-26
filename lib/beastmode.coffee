@@ -44,6 +44,12 @@ class Beastmode
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("0")})
 
+    # First character of line
+    firstCharacterOfLinePosition = Motions.firstCharacterOfLine(editor, cursor)
+    marker = editor.markBufferPosition(firstCharacterOfLinePosition)
+    @markers.push(marker)
+    editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("^")})
+
     @inBeastmode = true
 
   clear: ->

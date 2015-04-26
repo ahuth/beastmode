@@ -1,3 +1,5 @@
+{Point} = require 'atom'
+
 module.exports =
   nextWord: (cursor) ->
     cursor.getBeginningOfNextWordBufferPosition()
@@ -10,3 +12,11 @@ module.exports =
 
   startOfLine: (cursor) ->
     cursor.getCurrentLineBufferRange().start
+
+  firstCharacterOfLine: (editor, cursor) ->
+    firstCharacterColumn = undefined
+    lineRange = cursor.getCurrentLineBufferRange()
+    editor.scanInBufferRange /\S/, lineRange, ({range, stop}) ->
+      firstCharacterColumn = range.start.column
+      stop()
+    new Point(lineRange.start.row, firstCharacterColumn)
