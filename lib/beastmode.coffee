@@ -18,34 +18,33 @@ class Beastmode
 
   enter: ->
     editor = @workspace.getActiveTextEditor()
-    cursor = editor.cursors[0]
 
     # Next word
-    nextWordPosition = Motions.nextWord(cursor)
+    nextWordPosition = Motions.nextWord(editor)
     marker = editor.markBufferPosition(nextWordPosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("w")})
 
     # End of word
-    endOfWordPosition = Motions.endOfWord(cursor)
+    endOfWordPosition = Motions.endOfWord(editor)
     marker = editor.markBufferPosition(endOfWordPosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("e")})
 
     # End of line
-    endOfLinePosition = Motions.endOfLine(cursor)
+    endOfLinePosition = Motions.endOfLine(editor)
     marker = editor.markBufferPosition(endOfLinePosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("$")})
 
     # Start of line
-    startOfLinePosition = Motions.startOfLine(cursor)
+    startOfLinePosition = Motions.startOfLine(editor)
     marker = editor.markBufferPosition(startOfLinePosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("0")})
 
     # First character of line
-    firstCharacterOfLinePosition = Motions.firstCharacterOfLine(editor, cursor)
+    firstCharacterOfLinePosition = Motions.firstCharacterOfLine(editor)
     marker = editor.markBufferPosition(firstCharacterOfLinePosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("^")})

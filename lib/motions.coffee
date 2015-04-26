@@ -1,21 +1,21 @@
 {Point} = require 'atom'
 
 module.exports =
-  nextWord: (cursor) ->
-    cursor.getBeginningOfNextWordBufferPosition()
+  nextWord: (editor) ->
+    editor.cursors[0].getBeginningOfNextWordBufferPosition()
 
-  endOfWord: (cursor) ->
-    cursor.getCurrentWordBufferRange().end.translate([0, -1])
+  endOfWord: (editor) ->
+    editor.cursors[0].getCurrentWordBufferRange().end.translate([0, -1])
 
-  endOfLine: (cursor) ->
-    cursor.getCurrentLineBufferRange().end
+  endOfLine: (editor) ->
+    editor.cursors[0].getCurrentLineBufferRange().end
 
-  startOfLine: (cursor) ->
-    cursor.getCurrentLineBufferRange().start
+  startOfLine: (editor) ->
+    editor.cursors[0].getCurrentLineBufferRange().start
 
-  firstCharacterOfLine: (editor, cursor) ->
+  firstCharacterOfLine: (editor) ->
     firstCharacterColumn = undefined
-    lineRange = cursor.getCurrentLineBufferRange()
+    lineRange = editor.cursors[0].getCurrentLineBufferRange()
     editor.scanInBufferRange /\S/, lineRange, ({range, stop}) ->
       firstCharacterColumn = range.start.column
       stop()
