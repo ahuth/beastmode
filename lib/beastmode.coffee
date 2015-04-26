@@ -1,27 +1,31 @@
-Overlay = require './overlay'
+MotionMarker = require './motion-marker'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
 class Beastmode
-  constructor: (workspace) ->
-    @workspace = workspace
+  inBeastmode: false
+  marker: undefined
+
+  constructor: (@workspace) ->
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add "atom-workspace", "beastmode:toggle": => @toggle()
     @subscriptions.add atom.commands.add "atom-workspace", "beastmode:clear": => @clear()
 
-    @overlay = new Overlay
-    @modalPanel = atom.workspace.addModalPanel(item: @overlay.get(0), visible: false)
-
   destroy: ->
     @workspace = null
     @subscriptions.dispose()
-    @overlay.remove()
 
   toggle: ->
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+    if @inBeastmode then @clear() else @enter()
+
+  enter: ->
+    editor = @workspace.getActiveTextEditor()
+    cursor = editor.cursors[0]
+    nextWordPosition = cursor.getBeginningOfNextWordBufferPosition()
+    @marker = editor.markBufferPosition(nextWordPosition)
+    decoration = editor.decorateMarker(@marker, {type: "overlay", item: new MotionMarker("w")})
+    @inBeastmode = true
 
   clear: ->
-    @modalPanel.hide()
+    @marker.destroy?()
+    @inBeastmode = false
