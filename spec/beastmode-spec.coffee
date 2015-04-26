@@ -3,45 +3,28 @@ Beastmode = require '../lib/beastmode'
 describe "Beastmode", ->
   beastmode = null
   workspaceElement = null
-  activationPromise = null
 
   beforeEach ->
     beastmode = new Beastmode(atom.workspace)
     workspaceElement = atom.views.getView(atom.workspace)
-    activationPromise = atom.packages.activatePackage('beastmode')
-
-  it "toggles the modal panel", ->
-    expect(workspaceElement.querySelector('.beastmode')).not.toExist()
-    atom.commands.dispatch workspaceElement, 'beastmode:toggle'
+    jasmine.attachToDOM(workspaceElement)
 
     waitsForPromise ->
-      activationPromise
+      atom.workspace.open("sample.coffee")
 
     runs ->
-      expect(workspaceElement.querySelector('.beastmode')).toExist()
+      editor = atom.workspace.getActiveTextEditor()
+      editor.setCursorScreenPosition({row: 4, column: 13})
 
-      beastmodeElement = workspaceElement.querySelector('.beastmode')
-      expect(beastmodeElement).toExist()
+  it "toggles the motion markers", ->
+    expect(workspaceElement.querySelector('.beastmode-motion-marker')).not.toExist()
+    beastmode.toggle()
+    expect(workspaceElement.querySelector('.beastmode-motion-marker')).toExist()
+    beastmode.toggle()
+    expect(workspaceElement.querySelector('.beastmode-motion-marker')).not.toExist()
 
-      beastmodePanel = atom.workspace.panelForItem(beastmodeElement)
-      expect(beastmodePanel.isVisible()).toBe true
-      atom.commands.dispatch workspaceElement, 'beastmode:toggle'
-      expect(beastmodePanel.isVisible()).toBe false
-
-  it "clears the modal panel", ->
-    expect(workspaceElement.querySelector('.beastmode')).not.toExist()
-    atom.commands.dispatch workspaceElement, 'beastmode:toggle'
-
-    waitsForPromise ->
-      activationPromise
-
-    runs ->
-      expect(workspaceElement.querySelector('.beastmode')).toExist()
-
-      beastmodeElement = workspaceElement.querySelector('.beastmode')
-      expect(beastmodeElement).toExist()
-
-      beastmodePanel = atom.workspace.panelForItem(beastmodeElement)
-      expect(beastmodePanel.isVisible()).toBe true
-      atom.commands.dispatch workspaceElement, 'beastmode:clear'
-      expect(beastmodePanel.isVisible()).toBe false
+  it "clears the motion markers", ->
+    beastmode.toggle()
+    expect(workspaceElement.querySelector('.beastmode-motion-marker')).toExist()
+    beastmode.clear()
+    expect(workspaceElement.querySelector('.beastmode-motion-marker')).not.toExist()
