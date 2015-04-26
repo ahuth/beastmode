@@ -14,7 +14,13 @@ describe "Motions", ->
       cursor = editor.cursors[0]
 
   describe "nextWord", ->
-    it "works", ->
+    it "gets the start position of the next word", ->
       position = Motions.nextWord(cursor)
       expect(position.row).toBe 4
       expect(position.column).toBe 16
+
+  describe "endOfWord", ->
+    it "gets the current word's end position", ->
+      position = Motions.endOfWord(cursor)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 15
