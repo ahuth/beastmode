@@ -41,3 +41,9 @@ describe "Motions", ->
       position = Motions.firstCharacterOfLine(editor)
       expect(position.row).toBe 4
       expect(position.column).toBe 4
+
+  describe "previousWordBoundary", ->
+    it "gets the position of previous word boundary, starting with the current word", ->
+      position = Motions.previousWordBoundary(editor)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 11

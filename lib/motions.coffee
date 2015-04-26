@@ -20,3 +20,6 @@ module.exports =
       firstCharacterColumn = range.start.column
       stop()
     new Point(lineRange.start.row, firstCharacterColumn)
+
+  previousWordBoundary: (editor) ->
+    editor.cursors[0].getPreviousWordBoundaryBufferPosition() 

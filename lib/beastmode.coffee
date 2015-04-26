@@ -21,6 +21,7 @@ class Beastmode
 
     @_markMotion(Motions.nextWord(editor), "w", editor)
     @_markMotion(Motions.endOfWord(editor), "e", editor)
+    @_markMotion(Motions.previousWordBoundary(editor), "b", editor)
     @_markMotion(Motions.endOfLine(editor), "$", editor)
     @_markMotion(Motions.startOfLine(editor), "0", editor)
     @_markMotion(Motions.firstCharacterOfLine(editor), "^", editor)
