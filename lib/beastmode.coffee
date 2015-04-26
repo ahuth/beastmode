@@ -21,7 +21,7 @@ class Beastmode
     nextWordPosition = cursor.getBeginningOfNextWordBufferPosition()
     marker = editor.markBufferPosition(nextWordPosition)
     @markers.push(marker)
-    decoration = editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("w")})
+    editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("w")})
     @inBeastmode = true
 
   clear: ->
