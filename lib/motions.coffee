@@ -7,3 +7,6 @@ module.exports =
 
   endOfLine: (cursor) ->
     cursor.getCurrentLineBufferRange().end
+
+  startOfLine: (cursor) ->
+    cursor.getCurrentLineBufferRange().start

@@ -30,3 +30,9 @@ describe "Motions", ->
       position = Motions.endOfLine(cursor)
       expect(position.row).toBe 4
       expect(position.column).toBe 38
+
+  describe "startOfLine", ->
+    it "gets the start position of the current line", ->
+      position = Motions.startOfLine(cursor)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 0
