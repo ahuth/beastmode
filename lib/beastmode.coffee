@@ -9,6 +9,7 @@ class Beastmode
     @workspace = workspace
 
   destroy: ->
+    @clear()
     @workspace = null
 
   toggle: ->
@@ -23,5 +24,5 @@ class Beastmode
     @inBeastmode = true
 
   clear: ->
-    @marker.destroy?()
+    @marker?.destroy()
     @inBeastmode = false
