@@ -4,6 +4,7 @@ MotionMarker = require './motion-marker'
 module.exports =
 class Beastmode
   inBeastmode: false
+  iterations: 1
   markers: []
 
   constructor: (workspace) ->
@@ -18,12 +19,13 @@ class Beastmode
 
   enter: ->
     editor = @workspace.getActiveTextEditor()
-    @_markMotion(Motions.nextWord(editor), "w", editor)
+    @_markMotion(Motions.nextWord(editor, @iterations), "w", editor)
     @inBeastmode = true
 
   leave: ->
     marker.destroy() for marker in @markers
     @markers = []
+    @iterations = 1
     @inBeastmode = false
 
   _markMotion: (position, key, editor) ->
