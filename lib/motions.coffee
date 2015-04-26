@@ -4,3 +4,6 @@ module.exports =
 
   endOfWord: (cursor) ->
     cursor.getCurrentWordBufferRange().end
+
+  endOfLine: (cursor) ->
+    cursor.getCurrentLineBufferRange().end
