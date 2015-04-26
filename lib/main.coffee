@@ -2,8 +2,8 @@ Beastmode = require './beastmode'
 {CompositeDisposable} = require 'atom'
 
 module.exports =
-  beastmode: null
-  subscriptions: null
+  beastmode: undefined
+  subscriptions: undefined
 
   activate: ->
     @beastmode = new Beastmode(atom.workspace)
