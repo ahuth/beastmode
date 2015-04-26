@@ -3,7 +3,7 @@ MotionMarker = require './motion-marker'
 module.exports =
 class Beastmode
   inBeastmode: false
-  marker: undefined
+  markers: []
 
   constructor: (workspace) ->
     @workspace = workspace
@@ -19,10 +19,12 @@ class Beastmode
     editor = @workspace.getActiveTextEditor()
     cursor = editor.cursors[0]
     nextWordPosition = cursor.getBeginningOfNextWordBufferPosition()
-    @marker = editor.markBufferPosition(nextWordPosition)
-    decoration = editor.decorateMarker(@marker, {type: "overlay", item: new MotionMarker("w")})
+    marker = editor.markBufferPosition(nextWordPosition)
+    @markers.push(marker)
+    decoration = editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("w")})
     @inBeastmode = true
 
   clear: ->
-    @marker?.destroy()
+    marker.destroy() for marker in @markers
+    @markers = []
     @inBeastmode = false
