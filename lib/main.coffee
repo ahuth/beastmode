@@ -9,7 +9,7 @@ module.exports =
     @beastmode = new Beastmode(atom.workspace)
     @subscriptions = new CompositeDisposable
     @subscriptions.add atom.commands.add "atom-workspace", "beastmode:toggle": => @beastmode.toggle()
-    @subscriptions.add atom.commands.add "atom-workspace", "beastmode:clear": => @beastmode.clear()
+    @subscriptions.add atom.commands.add "atom-workspace", "beastmode:clear": => @beastmode.leave()
 
   deactivate: ->
     @subscriptions?.dispose()

@@ -10,11 +10,11 @@ class Beastmode
     @workspace = workspace
 
   destroy: ->
-    @clear()
+    @leave()
     @workspace = null
 
   toggle: ->
-    if @inBeastmode then @clear() else @enter()
+    if @inBeastmode then @leave() else @enter()
 
   enter: ->
     editor = @workspace.getActiveTextEditor()
@@ -28,7 +28,7 @@ class Beastmode
 
     @inBeastmode = true
 
-  clear: ->
+  leave: ->
     marker.destroy() for marker in @markers
     @markers = []
     @inBeastmode = false
