@@ -23,7 +23,7 @@ describe "Motions", ->
     it "gets the current word's end position", ->
       position = Motions.endOfWord(cursor)
       expect(position.row).toBe 4
-      expect(position.column).toBe 15
+      expect(position.column).toBe 14
 
   describe "endOfLine", ->
     it "gets the end position of the current line", ->

@@ -3,7 +3,7 @@ module.exports =
     cursor.getBeginningOfNextWordBufferPosition()
 
   endOfWord: (cursor) ->
-    cursor.getCurrentWordBufferRange().end
+    cursor.getCurrentWordBufferRange().end.translate([0, -1])
 
   endOfLine: (cursor) ->
     cursor.getCurrentLineBufferRange().end
