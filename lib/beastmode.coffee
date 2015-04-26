@@ -1,3 +1,4 @@
+Motions = require './motions'
 MotionMarker = require './motion-marker'
 
 module.exports =
@@ -18,7 +19,7 @@ class Beastmode
   enter: ->
     editor = @workspace.getActiveTextEditor()
     cursor = editor.cursors[0]
-    nextWordPosition = cursor.getBeginningOfNextWordBufferPosition()
+    nextWordPosition = Motions.nextWord(cursor)
     marker = editor.markBufferPosition(nextWordPosition)
     @markers.push(marker)
     editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker("w")})
