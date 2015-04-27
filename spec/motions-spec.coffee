@@ -84,3 +84,28 @@ describe "Motions", ->
       position = Motions.previousWordBoundary(editor, 5)
       expect(position.row).toBe 1
       expect(position.column).toBe 23
+
+  describe "endOfLine", ->
+    it "gets the end of the current line", ->
+      editor.setCursorScreenPosition({row: 0, column: 0})
+      position = Motions.endOfLine(editor, 1)
+      expect(position.row).toBe 0
+      expect(position.column).toBe 12
+
+    it "gets the end of the next line", ->
+      editor.setCursorScreenPosition({row: 0, column: 0})
+      position = Motions.endOfLine(editor, 2)
+      expect(position.row).toBe 1
+      expect(position.column).toBe 25
+
+    it "gets the end of the third line", ->
+      editor.setCursorScreenPosition({row: 0, column: 0})
+      position = Motions.endOfLine(editor, 3)
+      expect(position.row).toBe 2
+      expect(position.column).toBe 0
+
+    it "gets the end of the fourth line", ->
+      editor.setCursorScreenPosition({row: 0, column: 0})
+      position = Motions.endOfLine(editor, 4)
+      expect(position.row).toBe 3
+      expect(position.column).toBe 19

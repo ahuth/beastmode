@@ -24,3 +24,10 @@ module.exports =
       position = editor.cursors[0].getPreviousWordBoundaryBufferPosition()
     editor.setCursorBufferPosition(startPosition)
     position
+
+  endOfLine: (editor, iterations) ->
+    startPosition = editor.getCursorBufferPosition()
+    editor.setCursorBufferPosition({row: startPosition.row + iterations - 1, column: 0})
+    position = editor.cursors[0].getCurrentLineBufferRange().end
+    editor.setCursorBufferPosition(startPosition)
+    position
