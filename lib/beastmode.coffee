@@ -23,7 +23,10 @@ class Beastmode
     @inBeastmode = true
 
   leave: ->
-    marker.destroy() for marker in @markers
-    @markers = []
+    @_clearMarkers()
     @iterations = 1
     @inBeastmode = false
+
+  _clearMarkers: ->
+    marker.destroy() for marker in @markers
+    @markers = []
