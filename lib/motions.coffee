@@ -15,7 +15,7 @@ module.exports =
       editor.setCursorBufferPosition(position) unless startPosition == position
       position = editor.cursors[0].getEndOfCurrentWordBufferPosition()
     editor.setCursorBufferPosition(startPosition)
-    position
+    position.translate([0, -1])
 
   previousWordBoundary: (editor, iterations) ->
     startPosition = position = editor.getCursorBufferPosition()

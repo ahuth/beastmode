@@ -40,25 +40,25 @@ describe "Motions", ->
       editor.setCursorScreenPosition({row: 4, column: 13})
       position = Motions.endOfWord(editor, 1)
       expect(position.row).toBe 4
-      expect(position.column).toBe 15
+      expect(position.column).toBe 14
 
     it "gets the end position of the next word", ->
       editor.setCursorScreenPosition({row: 4, column: 13})
       position = Motions.endOfWord(editor, 2)
       expect(position.row).toBe 4
-      expect(position.column).toBe 17
+      expect(position.column).toBe 16
 
     it "gets the end position of the third word", ->
       editor.setCursorScreenPosition({row: 4, column: 13})
       position = Motions.endOfWord(editor, 3)
       expect(position.row).toBe 4
-      expect(position.column).toBe 19
+      expect(position.column).toBe 18
 
     it "wraps to the next line if necessary", ->
       editor.setCursorScreenPosition({row: 3, column: 4})
       position = Motions.endOfWord(editor, 7)
       expect(position.row).toBe 4
-      expect(position.column).toBe 9
+      expect(position.column).toBe 8
 
   describe "previousWordBoundary", ->
     it "gets the previous word boundary of the current word", ->
