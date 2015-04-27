@@ -39,6 +39,7 @@ class Beastmode
     @markers.push new Marker(editor, Motions.endOfWord(editor, @iterations), "e")
     @markers.push new Marker(editor, Motions.previousWordBoundary(editor, @iterations), "b")
     @markers.push new Marker(editor, Motions.endOfLine(editor, @iterations), "$")
+    @markers.push new Marker(editor, Motions.startOfLine(editor, @iterations), "0")
 
   _clearMarkers: ->
     marker.destroy() for marker in @markers

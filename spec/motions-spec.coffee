@@ -109,3 +109,28 @@ describe "Motions", ->
       position = Motions.endOfLine(editor, 4)
       expect(position.row).toBe 3
       expect(position.column).toBe 19
+
+  describe "startOfLine", ->
+    it "gets the start of the current line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.startOfLine(editor, 1)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 0
+
+    it "gets the start of the next line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.startOfLine(editor, 2)
+      expect(position.row).toBe 3
+      expect(position.column).toBe 0
+
+    it "gets the start of the third line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.startOfLine(editor, 3)
+      expect(position.row).toBe 2
+      expect(position.column).toBe 0
+
+    it "gets the start of the fourth line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.startOfLine(editor, 4)
+      expect(position.row).toBe 1
+      expect(position.column).toBe 0
