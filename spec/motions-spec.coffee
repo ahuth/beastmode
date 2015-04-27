@@ -59,3 +59,28 @@ describe "Motions", ->
       position = Motions.endOfWord(editor, 7)
       expect(position.row).toBe 4
       expect(position.column).toBe 9
+
+  describe "previousWordBoundary", ->
+    it "gets the previous word boundary of the current word", ->
+      editor.setCursorScreenPosition({row: 4, column: 23})
+      position = Motions.previousWordBoundary(editor, 1)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 20
+
+    it "gets the previous word boundary of the next word", ->
+      editor.setCursorScreenPosition({row: 4, column: 23})
+      position = Motions.previousWordBoundary(editor, 2)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 19
+
+    it "gets the previous word boundary of the third word", ->
+      editor.setCursorScreenPosition({row: 4, column: 23})
+      position = Motions.previousWordBoundary(editor, 3)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 18
+
+    it "wraps to the previous line if necessary", ->
+      editor.setCursorScreenPosition({row: 3, column: 4})
+      position = Motions.previousWordBoundary(editor, 5)
+      expect(position.row).toBe 1
+      expect(position.column).toBe 23

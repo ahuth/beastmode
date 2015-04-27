@@ -37,6 +37,7 @@ class Beastmode
     editor = @workspace.getActiveTextEditor()
     @markers.push new Marker(editor, Motions.nextWord(editor, @iterations), "w")
     @markers.push new Marker(editor, Motions.endOfWord(editor, @iterations), "e")
+    @markers.push new Marker(editor, Motions.previousWordBoundary(editor, @iterations), "b")
 
   _clearMarkers: ->
     marker.destroy() for marker in @markers
