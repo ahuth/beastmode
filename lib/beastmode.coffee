@@ -1,39 +1,42 @@
 Motions = require './motions'
-MotionMarker = require './motion-marker'
+Marker = require './marker'
 
 module.exports =
 class Beastmode
   inBeastmode: false
+  iterations: 1
   markers: []
+  keyCodeForZero: 48
 
   constructor: (workspace) ->
     @workspace = workspace
 
   destroy: ->
-    @clear()
+    @leave()
     @workspace = null
 
   toggle: ->
-    if @inBeastmode then @clear() else @enter()
+    if @inBeastmode then @leave() else @enter()
 
   enter: ->
-    editor = @workspace.getActiveTextEditor()
-
-    @_markMotion(Motions.nextWord(editor), "w", editor)
-    @_markMotion(Motions.endOfWord(editor), "e", editor)
-    @_markMotion(Motions.previousWordBoundary(editor), "b", editor)
-    @_markMotion(Motions.endOfLine(editor), "$", editor)
-    @_markMotion(Motions.startOfLine(editor), "0", editor)
-    @_markMotion(Motions.firstCharacterOfLine(editor), "^", editor)
-
+    @_drawMarkers()
     @inBeastmode = true
 
-  clear: ->
-    marker.destroy() for marker in @markers
-    @markers = []
+  leave: ->
+    @_clearMarkers()
+    @iterations = 1
     @inBeastmode = false
 
-  _markMotion: (position, key, editor) ->
-    marker = editor.markBufferPosition(position)
-    @markers.push(marker)
-    editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker(key)})
+  onNumberEntered: (event) =>
+    return unless @inBeastmode
+    @iterations = event.originalEvent.keyCode - @keyCodeForZero
+    @_drawMarkers()
+
+  _drawMarkers: ->
+    @_clearMarkers() if @markers
+    editor = @workspace.getActiveTextEditor()
+    @markers.push new Marker(editor, Motions.nextWord(editor, @iterations), "w")
+
+  _clearMarkers: ->
+    marker.destroy() for marker in @markers
+    @markers = []

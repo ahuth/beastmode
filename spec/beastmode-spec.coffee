@@ -26,5 +26,5 @@ describe "Beastmode", ->
   it "clears the motion markers", ->
     beastmode.toggle()
     expect(workspaceElement.querySelector('.beastmode-motion-marker')).toExist()
-    beastmode.clear()
+    beastmode.leave()
     expect(workspaceElement.querySelector('.beastmode-motion-marker')).not.toExist()

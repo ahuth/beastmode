@@ -10,40 +10,28 @@ describe "Motions", ->
 
     runs ->
       editor = atom.workspace.getActiveTextEditor()
-      editor.setCursorScreenPosition({row: 4, column: 13})
 
   describe "nextWord", ->
     it "gets the start position of the next word", ->
-      position = Motions.nextWord(editor)
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.nextWord(editor, 1)
       expect(position.row).toBe 4
       expect(position.column).toBe 16
 
-  describe "endOfWord", ->
-    it "gets the current word's end position", ->
-      position = Motions.endOfWord(editor)
+    it "gets the start position of the second next word", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.nextWord(editor, 2)
       expect(position.row).toBe 4
-      expect(position.column).toBe 14
+      expect(position.column).toBe 18
 
-  describe "endOfLine", ->
-    it "gets the end position of the current line", ->
-      position = Motions.endOfLine(editor)
+    it "gets the start position of the third next word", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.nextWord(editor, 3)
       expect(position.row).toBe 4
-      expect(position.column).toBe 38
+      expect(position.column).toBe 20
 
-  describe "startOfLine", ->
-    it "gets the start position of the current line", ->
-      position = Motions.startOfLine(editor)
-      expect(position.row).toBe 4
-      expect(position.column).toBe 0
-
-  describe "firstCharacterOfLine", ->
-    it "gets the position of the first character of the current line", ->
-      position = Motions.firstCharacterOfLine(editor)
-      expect(position.row).toBe 4
-      expect(position.column).toBe 4
-
-  describe "previousWordBoundary", ->
-    it "gets the position of previous word boundary, starting with the current word", ->
-      position = Motions.previousWordBoundary(editor)
+    it "wraps to the next line if necessary", ->
+      editor.setCursorScreenPosition({row: 3, column: 4})
+      position = Motions.nextWord(editor, 8)
       expect(position.row).toBe 4
       expect(position.column).toBe 11
