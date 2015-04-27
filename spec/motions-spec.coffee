@@ -2,7 +2,6 @@ Motions = require '../lib/motions'
 
 describe "Motions", ->
   editor = null
-  cursor = null
 
   beforeEach ->
     waitsForPromise ->
