@@ -19,7 +19,7 @@ class Beastmode
 
   enter: ->
     editor = @workspace.getActiveTextEditor()
-    @_markMotion(Motions.nextWord(editor, @iterations), "w", editor)
+    @markers.push new Marker(editor, Motions.nextWord(editor, @iterations), "w")
     @inBeastmode = true
 
   leave: ->
@@ -27,8 +27,3 @@ class Beastmode
     @markers = []
     @iterations = 1
     @inBeastmode = false
-
-  _markMotion: (position, key, editor) ->
-    marker = editor.markBufferPosition(position)
-    @markers.push(marker)
-    editor.decorateMarker(marker, {type: "overlay", item: new Marker(key)})
