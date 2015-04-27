@@ -1,7 +1,7 @@
-MotionMarker = require '../lib/motion-marker'
+Marker = require '../lib/marker'
 
-describe "MotionMarker", ->
-  viewClass = MotionMarker
+describe "Marker", ->
+  viewClass = Marker
 
   it "is a thing", ->
     view = new viewClass("X")

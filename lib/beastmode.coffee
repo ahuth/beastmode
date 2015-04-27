@@ -1,5 +1,5 @@
 Motions = require './motions'
-MotionMarker = require './motion-marker'
+Marker = require './marker'
 
 module.exports =
 class Beastmode
@@ -31,4 +31,4 @@ class Beastmode
   _markMotion: (position, key, editor) ->
     marker = editor.markBufferPosition(position)
     @markers.push(marker)
-    editor.decorateMarker(marker, {type: "overlay", item: new MotionMarker(key)})
+    editor.decorateMarker(marker, {type: "overlay", item: new Marker(key)})
