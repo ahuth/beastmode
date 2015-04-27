@@ -134,3 +134,28 @@ describe "Motions", ->
       position = Motions.startOfLine(editor, 4)
       expect(position.row).toBe 1
       expect(position.column).toBe 0
+
+  describe "firstCharacterOfLine", ->
+    it "gets the first character on the current line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.firstCharacterOfLine(editor, 1)
+      expect(position.row).toBe 4
+      expect(position.column).toBe 4
+
+    it "gets the first character on the next line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.firstCharacterOfLine(editor, 2)
+      expect(position.row).toBe 3
+      expect(position.column).toBe 2
+
+    it "gets the first character on the third line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.firstCharacterOfLine(editor, 3)
+      expect(position.row).toBe 2
+      expect(position.column).toBe 0
+
+    it "gets the first character on the fourth line", ->
+      editor.setCursorScreenPosition({row: 4, column: 13})
+      position = Motions.firstCharacterOfLine(editor, 4)
+      expect(position.row).toBe 1
+      expect(position.column).toBe 2

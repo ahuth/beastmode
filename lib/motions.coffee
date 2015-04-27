@@ -38,3 +38,16 @@ module.exports =
     position = editor.cursors[0].getCurrentLineBufferRange().start
     editor.setCursorBufferPosition(startPosition)
     position
+
+  firstCharacterOfLine: (editor, iterations) ->
+    startPosition = editor.getCursorBufferPosition()
+    editor.setCursorBufferPosition({row: startPosition.row - iterations + 1, column: 0})
+
+    firstCharacterColumn = undefined
+    lineRange = editor.cursors[0].getCurrentLineBufferRange()
+    editor.scanInBufferRange /\S/, lineRange, ({range, stop}) ->
+      firstCharacterColumn = range.start.column
+      stop()
+
+    editor.setCursorBufferPosition(startPosition)
+    new Point(lineRange.start.row, firstCharacterColumn)
