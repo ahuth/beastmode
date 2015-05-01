@@ -30,10 +30,10 @@ class Beastmode
   onNumberEntered: (event) =>
     return unless @inBeastmode
     @iterations = event.originalEvent.keyCode - @keyCodeForZero
+    @_clearMarkers()
     @_drawMarkers()
 
   _drawMarkers: ->
-    @_clearMarkers() if @markers
     editor = @workspace.getActiveTextEditor()
     @markers.push new Marker(editor, Motions.nextWord(editor, @iterations), "w")
     @markers.push new Marker(editor, Motions.endOfWord(editor, @iterations), "e")
