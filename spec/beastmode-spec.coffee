@@ -14,7 +14,7 @@ describe "Beastmode", ->
 
     runs ->
       editor = atom.workspace.getActiveTextEditor()
-      editor.setCursorScreenPosition({row: 4, column: 13})
+      editor.setCursorBufferPosition({row: 4, column: 13})
 
   it "toggles the motion markers", ->
     expect(workspaceElement.querySelector('.beastmode-motion-marker')).not.toExist()
