@@ -7,6 +7,7 @@ class Marker extends View
       @span key, class: "beastmode-motion-key"
 
   initialize: (editor, position, key) ->
+    @bufferPosition = position
     @marker = editor.markBufferPosition(position)
     editor.decorateMarker(@marker, {type: "overlay", item: this})
 

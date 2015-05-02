@@ -18,6 +18,11 @@ module.exports =
       atom.views.getView(atom.workspace.getActiveTextEditor()).classList.remove("beastmode")
       @beastmode.leave()
 
+    @subscriptions.add atom.commands.add "atom-workspace", "beastmode:move": (event) =>
+      @beastmode.onMove(event)
+      workspaceElement = atom.views.getView(atom.workspace)
+      atom.commands.dispatch(workspaceElement, "beastmode:clear")
+
   deactivate: ->
     @subscriptions?.dispose()
     @beastmode?.destroy()

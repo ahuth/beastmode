@@ -18,3 +18,7 @@ describe "Marker", ->
   it "creates a marker and decorates it in the editor", ->
     view = new viewClass(editor, {row: 0, column: 0}, "X")
     expect(editorElement.querySelector("atom-overlay .beastmode-motion-marker")).toExist()
+
+  it "keeps track of its buffer position", ->
+    view = new viewClass(editor, {row: 2, column: 3}, "X")
+    expect(view.bufferPosition).toEqual {row: 2, column: 3}
